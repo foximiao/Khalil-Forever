@@ -1,1120 +1,681 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>方大同 - 灵魂音乐的永恒旋律</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- 自定义 Tailwind 配置 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1a1a2e',
-                        secondary: '#16213e',
-                        accent: '#e94560',
-                        dark: '#0f3460',
-                        light: '#f5f5f5'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        serif: ['Noto Serif SC', 'serif']
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            }
-            .text-shadow-lg {
-                text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-            }
-            .bg-gradient-hero {
-                background: linear-gradient(135deg, #0a2463 0%, #1e3a8a 100%);
-            }
-            .bg-gradient-card {
-                background: linear-gradient(145deg, rgba(62, 146, 204, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
-            }
-            .border-gradient {
-                border-image: linear-gradient(to right, #3e92cc, #d4af37) 1;
-            }
-            .timeline-dot::before {
-                content: '';
-                position: absolute;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background-color: #d4af37;
-                left: -10px;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: 10;
-            }
-            .timeline-line::after {
-                content: '';
-                position: absolute;
-                width: 2px;
-                background-color: #3e92cc;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                z-index: 5;
-            }
-            .album-card:hover .album-cover {
-                transform: scale(1.05);
-            }
-            .album-cover {
-                transition: transform 0.3s ease;
-            }
-            .music-wave {
-                position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 60px;
-            }
-            .music-wave span {
-                display: block;
-                width: 3px;
-                margin: 0 2px;
-                background-color: #d4af37;
-                animation: wave 1.2s infinite ease-in-out;
-            }
-            .music-wave span:nth-child(2) {
-                animation-delay: 0.1s;
-            }
-            .music-wave span:nth-child(3) {
-                animation-delay: 0.2s;
-            }
-            .music-wave span:nth-child(4) {
-                animation-delay: 0.3s;
-            }
-            .music-wave span:nth-child(5) {
-                animation-delay: 0.4s;
-            }
-            @keyframes wave {
-                0%, 100% {
-                    height: 10px;
-                }
-                50% {
-                    height: 40px;
-                }
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.className += " js";</script>
+<title>方大同 · 1983 — 2025</title>
+<meta name="description" content="方大同（Khalil Fong，1983.7.14 — 2025.2.21）纪念页：生平、作品与留下的声音。">
+<style>
+  /* ============================================================
+     方大同纪念页 · 素雅画册风
+     全部样式内联，不依赖任何外部资源
+     ============================================================ */
+
+  :root{
+    --paper:      #FBF9F6;
+    --paper-2:    #F4F1EB;
+    --ink:        #1A1917;
+    --ink-2:      #46423C;
+    --ink-3:      #7C766D;
+    --rule:       #E3DED5;
+    --accent:     #96684A;
+    --accent-2:   #C4A288;
+    --serif: "Noto Serif SC","Source Han Serif SC","Source Han Serif CN",
+             "Songti SC","SimSun","Times New Roman",serif;
+    --sans:  "Noto Sans SC","PingFang SC","Microsoft YaHei",
+             -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --measure: 43rem;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:17px;
+    line-height:2;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* 纸张质感：极淡的噪点，纯 CSS，无外部图片 */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:.5;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(150,104,74,.035), transparent 55%),
+      radial-gradient(circle at 82% 78%, rgba(70,66,60,.03), transparent 58%);
+  }
+
+  .page{ position:relative; z-index:1; }
+
+  .wrap{
+    max-width:var(--measure);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- 顶部细导航 ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,249,246,.86);
+    backdrop-filter:saturate(160%) blur(10px);
+    -webkit-backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .35s ease;
+  }
+  .nav.is-stuck{ border-bottom-color:var(--rule); }
+  .nav-in{
+    max-width:var(--measure); margin:0 auto; padding:14px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    font-family:var(--sans); font-size:13px; letter-spacing:.14em;
+  }
+  .nav-mark{
+    font-family:var(--serif); font-size:15px; letter-spacing:.22em;
+    color:var(--ink); text-decoration:none; white-space:nowrap;
+  }
+  .nav-links{ display:flex; gap:22px; }
+  .nav-links a{
+    color:var(--ink-3); text-decoration:none; padding:2px 0;
+    border-bottom:1px solid transparent; transition:color .25s,border-color .25s;
+  }
+  .nav-links a:hover{ color:var(--accent); border-bottom-color:var(--accent-2); }
+  @media (max-width:640px){
+    .nav-links{ gap:14px; font-size:12px; letter-spacing:.08em; }
+    .nav-mark{ font-size:14px; letter-spacing:.14em; }
+  }
+  /* 窄屏：取消强制换行交给浏览器折行，导航进一步收紧，避免横向溢出 */
+  @media (max-width:560px){
+    .br-wide{ display:none; }
+    .nav-in{ padding:12px 20px; gap:10px; }
+    .nav-links{ gap:11px; font-size:11.5px; letter-spacing:0; }
+    .nav-mark{ font-size:13px; letter-spacing:.1em; }
+    .wrap{ padding:0 22px; }
+    .hero-line{ font-size:16.5px; }
+  }
+  @media (max-width:380px){
+    .nav-links{ gap:9px; font-size:11px; }
+  }
+
+  /* ---------- 封面 ---------- */
+  .hero{
+    min-height:82vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:96px 0 72px;
+    position:relative;
+  }
+  /* 细唱针环：一层极淡的同心圆，暗示唱片 */
+  .hero::after{
+    content:"";
+    position:absolute; right:-14%; top:50%; transform:translateY(-50%);
+    width:min(58vw,520px); aspect-ratio:1; border-radius:50%;
+    border:1px solid rgba(150,104,74,.13);
+    box-shadow:
+      0 0 0 26px rgba(150,104,74,.05),
+      0 0 0 62px rgba(150,104,74,.035),
+      0 0 0 104px rgba(150,104,74,.022);
+    pointer-events:none;
+  }
+  @media (max-width:760px){ .hero::after{ display:none; } }
+
+  .hero-kicker{
+    font-family:var(--sans); font-size:12px; letter-spacing:.42em;
+    color:var(--accent); text-transform:uppercase; margin:0 0 26px;
+  }
+  .hero h1{
+    font-size:clamp(46px,10vw,88px);
+    line-height:1.12; letter-spacing:.16em;
+    margin:0 0 6px; font-weight:500;
+  }
+  .hero-latin{
+    font-family:var(--sans); font-size:13px; letter-spacing:.34em;
+    color:var(--ink-3); text-transform:uppercase; margin:0 0 34px;
+  }
+  .hero-dates{
+    font-family:var(--sans); font-size:15px; letter-spacing:.2em;
+    color:var(--ink-2); margin:0 0 30px;
+  }
+  .hero-dates span{ color:var(--accent-2); margin:0 .5em; }
+  .hero-line{
+    font-size:clamp(17px,2.4vw,20px); line-height:2.1;
+    color:var(--ink-2); max-width:32em; margin:0;
+  }
+  .rule{
+    width:56px; height:1px; background:var(--accent-2);
+    border:0; margin:38px 0 0;
+  }
+
+  /* ---------- 通用分区 ---------- */
+  section{ padding:76px 0; }
+  section + section{ border-top:1px solid var(--rule); }
+
+  .sec-head{ margin:0 0 46px; }
+  .sec-num{
+    font-family:var(--sans); font-size:11px; letter-spacing:.3em;
+    color:var(--accent); display:block; margin:0 0 12px;
+  }
+  .sec-head h2{
+    font-size:clamp(25px,4.4vw,34px); letter-spacing:.14em;
+    margin:0; font-weight:500;
+  }
+  .sec-head p{
+    margin:16px 0 0; color:var(--ink-3); font-size:15px;
+    font-family:var(--sans); letter-spacing:.04em; line-height:1.9;
+  }
+
+  /* ---------- 序 ---------- */
+  .prose p{ margin:0 0 26px; color:var(--ink-2); }
+  .prose p:last-child{ margin-bottom:0; }
+  .prose .lead::first-letter{
+    float:left; font-size:3.1em; line-height:.86;
+    padding:.06em .12em 0 0; color:var(--accent);
+  }
+
+  /* ---------- 年表 ---------- */
+  .era{ margin:0 0 14px; }
+  .era-title{
+    font-family:var(--sans); font-size:12px; letter-spacing:.3em;
+    color:var(--accent); margin:52px 0 26px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .era-title::after{
+    content:""; flex:1; height:1px; background:var(--rule);
+  }
+  .era:first-child .era-title{ margin-top:0; }
+
+  .tl{ list-style:none; margin:0; padding:0 0 0 30px; position:relative; }
+  .tl::before{
+    content:""; position:absolute; left:5px; top:.9em; bottom:.9em;
+    width:1px; background:var(--rule);
+  }
+  .tl li{ position:relative; padding:0 0 30px; }
+  .tl li:last-child{ padding-bottom:0; }
+  .tl li::before{
+    content:""; position:absolute; left:-30px; top:.95em;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--paper); border:1px solid var(--accent-2);
+    transition:background .3s ease, transform .3s ease;
+  }
+  .tl li.key::before{ background:var(--accent); border-color:var(--accent); }
+  .tl time{
+    display:block; font-family:var(--sans); font-size:12.5px;
+    letter-spacing:.16em; color:var(--accent); margin:0 0 6px;
+  }
+  .tl p{ margin:0; color:var(--ink-2); }
+
+  /* ---------- 作品 ---------- */
+  .works{ display:grid; gap:0; }
+  .work{
+    display:grid; grid-template-columns:88px 1fr; gap:26px;
+    padding:26px 0; border-bottom:1px solid var(--rule);
+    align-items:baseline;
+  }
+  .work:first-child{ border-top:1px solid var(--rule); }
+  .work-y{
+    font-family:var(--sans); font-size:13px; letter-spacing:.14em;
+    color:var(--accent); padding-top:.35em;
+  }
+  .work h3{
+    margin:0 0 8px; font-size:19px; letter-spacing:.08em; font-weight:500;
+  }
+  .work h3 small{
+    font-family:var(--sans); font-size:11.5px; letter-spacing:.18em;
+    color:var(--ink-3); margin-left:10px; font-weight:400;
+  }
+  .work p{ margin:0; color:var(--ink-3); font-size:15px; line-height:1.95; }
+  @media (max-width:560px){
+    .work{ grid-template-columns:1fr; gap:6px; }
+    .work-y{ padding-top:0; }
+  }
+
+  /* ---------- 代表作 ---------- */
+  .songs{
+    display:flex; flex-wrap:wrap; gap:9px 10px; margin:0; padding:0; list-style:none;
+  }
+  .songs li{
+    font-family:var(--sans); font-size:13px; letter-spacing:.06em;
+    color:var(--ink-2); padding:5px 13px;
+    border:1px solid var(--rule); border-radius:999px;
+    transition:border-color .25s,color .25s;
+  }
+  .songs li:hover{ border-color:var(--accent-2); color:var(--accent); }
+
+  /* ---------- 荣誉 ---------- */
+  .honors{ list-style:none; margin:0; padding:0; }
+  .honors li{
+    display:grid; grid-template-columns:74px 1fr; gap:22px;
+    padding:15px 0; border-bottom:1px solid var(--rule);
+    color:var(--ink-2);
+  }
+  .honors li:first-child{ border-top:1px solid var(--rule); }
+  .honors b{
+    font-family:var(--sans); font-size:12.5px; letter-spacing:.12em;
+    color:var(--accent); font-weight:400;
+  }
+  @media (max-width:560px){
+    .honors li{ grid-template-columns:1fr; gap:4px; }
+  }
+
+  /* ---------- 摘句 ---------- */
+  .quote{
+    margin:0 0 44px; padding:0 0 0 26px;
+    border-left:2px solid var(--accent-2);
+  }
+  .quote:last-child{ margin-bottom:0; }
+  .quote blockquote{
+    margin:0; font-size:clamp(17px,2.6vw,20px); line-height:2.05;
+    color:var(--ink); letter-spacing:.04em;
+  }
+  .quote cite{
+    display:block; margin-top:14px; font-style:normal;
+    font-family:var(--sans); font-size:12.5px; letter-spacing:.16em;
+    color:var(--ink-3);
+  }
+
+  /* ---------- 尾声 ---------- */
+  .coda{ text-align:center; padding:96px 0 88px; }
+  .coda .mark{
+    font-size:clamp(24px,4.6vw,32px); letter-spacing:.3em;
+    color:var(--ink); margin:0 0 22px;
+  }
+  .coda p{ color:var(--ink-3); margin:0 auto; max-width:28em; font-size:15px; }
+
+  /* ---------- 页脚 ---------- */
+  footer{
+    border-top:1px solid var(--rule);
+    padding:44px 0 64px;
+    font-family:var(--sans); font-size:12.5px; line-height:2;
+    color:var(--ink-3); letter-spacing:.04em;
+  }
+  footer a{ color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); }
+  footer a:hover{ color:var(--accent); border-bottom-color:var(--accent-2); }
+  footer .fnote{ margin:18px 0 0; color:#9A948A; }
+
+  /* ---------- 入场动画（渐进增强）----------
+     默认状态下内容完全可见；只有 JS 正常运行时才加上 .js，
+     才会先隐藏再由 IntersectionObserver 淡入。
+     这样即使 JS 报错或被禁用，页面内容也不会消失。 */
+  .js .rise{ opacity:0; transform:translateY(16px); }
+  .js .rise.in{
+    opacity:1; transform:none;
+    transition:opacity .8s ease, transform .8s cubic-bezier(.22,.61,.36,1);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .js .rise{ opacity:1; transform:none; }
+  }
+
+  /* ---------- 回到顶部 ---------- */
+  .top{
+    position:fixed; right:22px; bottom:22px; z-index:60;
+    width:42px; height:42px; border-radius:50%;
+    display:grid; place-items:center;
+    background:var(--paper); border:1px solid var(--rule);
+    color:var(--ink-3); text-decoration:none; font-size:15px;
+    opacity:0; visibility:hidden; transition:opacity .3s,visibility .3s,color .25s,border-color .25s;
+  }
+  .top.show{ opacity:1; visibility:visible; }
+  .top:hover{ color:var(--accent); border-color:var(--accent-2); }
+
+  @media print{
+    .nav,.top{ display:none; }
+    .js .rise{ opacity:1; transform:none; }
+    body{ background:#fff; }
+  }
+</style>
 </head>
-<body class="bg-gray-900 text-light font-sans">
-    <!-- 导航栏 -->
-    <nav class="fixed top-0 left-0 w-full bg-primary bg-opacity-90 backdrop-blur-md z-50 shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fa fa-music text-accent text-2xl"></i>
-                <span class="text-xl font-bold text-accent">方大同音乐纪念</span>
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="hover:text-accent transition-colors duration-300">首页</a>
-                <a href="#biography" class="hover:text-accent transition-colors duration-300">生平</a>
-                <a href="#albums" class="hover:text-accent transition-colors duration-300">专辑</a>
-                <a href="#quotes" class="hover:text-accent transition-colors duration-300">语录</a>
-            </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-light focus:outline-none">
-                    <i class="fa fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-        <!-- 移动端菜单 -->
-        <div id="mobile-menu" class="hidden md:hidden bg-primary bg-opacity-95 backdrop-blur-md">
-            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
-                <a href="#home" class="py-2 hover:text-accent transition-colors duration-300">首页</a>
-                <a href="#biography" class="py-2 hover:text-accent transition-colors duration-300">生平</a>
-                <a href="#albums" class="py-2 hover:text-accent transition-colors duration-300">专辑</a>
-                <a href="#quotes" class="py-2 hover:text-accent transition-colors duration-300">语录</a>
-            </div>
-        </div>
-    </nav>
+<body>
+<div class="page">
 
-    <!-- 英雄区域 -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        <div class="absolute inset-0 z-0">
-            <img src="https://p11-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/2124fd58e47841a4bdac01d2189918f1~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260418224542336E5F4DFC292DD6E776&rrcfp=f06b921b&x-expires=1779115596&x-signature=k3uHKom0YNecw0p9LbD0XJsp%2FTU%3D" 
-                 alt="音乐背景" 
-                 class="w-full h-full object-cover opacity-70">
-            <div class="absolute inset-0 bg-gradient-to-b from-primary/50 to-gray-900/90"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 z-10 text-center">
-            <div class="flex flex-col items-center">
-                <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-accent mb-8 shadow-2xl animate-float bg-gradient-to-br from-primary to-secondary p-1">
-                    <div class="w-full h-full rounded-full overflow-hidden">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/labis/caedb2695f10558042d65338ae204fc0~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=e1oP9kJdEnFwhX47t4yfNysLhCs%3D" 
-                             alt="方大同" 
-                             class="w-full h-full object-cover">
-                    </div>
-                </div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-accent to-pink-400">方大同</h1>
-                <p class="text-xl md:text-2xl mb-8 text-light font-serif">1983 - 2025</p>
-                <p class="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed text-gray-300">
-                    灵魂音乐的守护者，华语乐坛的瑰宝，用音乐传递爱与希望的使者
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#biography" class="bg-accent hover:bg-accent/80 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-accent/30">
-                        探索生平
-                    </a>
-                    <a href="#albums" class="bg-transparent hover:bg-white/10 border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        聆听音乐
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 音乐可视化效果 -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-64 md:w-96 h-16 opacity-80">
-            <div class="music-wave">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- 生平时间轴 -->
-    <section id="biography" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-accent">音乐人生</h2>
-            
-            <div class="relative max-w-4xl mx-auto">
-                <!-- 时间轴线 -->
-                <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-secondary transform md:-translate-x-1/2"></div>
-                
-                <!-- 时间点 -->
-                <div class="space-y-16">
-                    <!-- 1983年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 timeline-dot timeline-line md:ml-auto md:mr-0 md:pl-8 md:pr-0 pl-8">
-                            <h3 class="text-2xl font-bold text-accent mb-2">1983年7月14日</h3>
-                            <p class="text-lg">出生于美国夏威夷，父亲是鼓手，母亲是英语教育工作者</p>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>方大同出生在一个音乐世家，父亲是鼓手，从小受到音乐的熏陶。多元文化的成长环境为他后来融合东西方音乐元素的创作风格奠定了基础。</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 1990年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 md:order-1 order-2 pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>随家人从夏威夷搬到上海，学习中文及中国文化。这段经历让他深入了解中国传统文化，为后来的音乐创作提供了丰富的灵感来源。</p>
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left mb-6 md:mb-0 timeline-dot timeline-line md:ml-0 md:mr-auto pl-8 md:order-2 order-1">
-                            <h3 class="text-2xl font-bold text-accent mb-2">1990年</h3>
-                            <p class="text-lg">移居上海，接触中国文化</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 1998年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 timeline-dot timeline-line md:ml-auto md:mr-0 pl-8">
-                            <h3 class="text-2xl font-bold text-accent mb-2">1998年</h3>
-                            <p class="text-lg">定居香港，开始音乐创作</p>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>14岁开始创作，15岁自学吉他，18岁自学钢琴。在香港的生活让他接触到更多元的音乐风格，开始形成自己独特的创作风格。</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2000年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 md:order-1 order-2 pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>17岁的方大同签约华纳唱片，最初被安排做幕后，为刘德华、张学友、张惠妹等知名歌手写歌，积累了丰富的创作经验。</p>
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left mb-6 md:mb-0 timeline-dot timeline-line md:ml-0 md:mr-auto pl-8 md:order-2 order-1">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2000年</h3>
-                            <p class="text-lg">签约华纳唱片，开始幕后创作</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 2005年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 timeline-dot timeline-line md:ml-auto md:mr-0 pl-8">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2005年</h3>
-                            <p class="text-lg">首张个人专辑《Soulboy》发行，正式出道</p>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>推出首张个人专辑《Soulboy》，在香港乐坛正式出道。专辑中的《春风吹》等歌曲展现了他的唱作才华与独特风格，让他跃升香港一线音乐人。</p>
-                                <div class="mt-4">
-                                    <img src="https://p3-doubao-search-sign.byteimg.com/labis/bf2388c8b7e1d4765d53bdc0a54f2b56~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=Z%2BSq89Kd0%2Fq2viH5Sw%2Bcb67mp%2Fs%3D" 
-                                         alt="Soulboy专辑封面" 
-                                         class="w-24 h-24 object-cover rounded-md mx-auto md:mx-0">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2007年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 md:order-1 order-2 pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>发行第三张专辑《未来》，主打歌《Love Song》成为其代表作。凭借此专辑首度提名金曲奖"最佳男歌手奖"并获得新城国语力颁奖礼"新城国语力男歌手奖"。</p>
-                                <div class="mt-4">
-                                    <img src="https://p11-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_c9a79bc43cb2576e498e05fb7693c25b_sx_91452_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=grvecGW2idzjswd7JnZZg%2FyNtV4%3D" 
-                                         alt="未来专辑封面" 
-                                         class="w-24 h-24 object-cover rounded-md mx-auto md:mx-0">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left mb-6 md:mb-0 timeline-dot timeline-line md:ml-0 md:mr-auto pl-8 md:order-2 order-1">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2007年</h3>
-                            <p class="text-lg">专辑《未来》大获成功，《Love Song》成为代表作</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 2008年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 timeline-dot timeline-line md:ml-auto md:mr-0 pl-8">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2008年</h3>
-                            <p class="text-lg">专辑《橙月》发行，获叱咤乐坛多项大奖</p>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>发行专辑《橙月》，在香港叱咤乐坛颁奖礼同时夺得男歌手金奖、唱作人金奖和作曲人大奖三个奖项，成为"叱咤乐坛男歌手金奖"史上最年轻的得主。</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2016年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 md:order-1 order-2 pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>成立个人音乐品牌"赋音乐"，并发行双碟专辑《JTW西游记》。这张专辑展现了他对中西音乐文化融合的深度探索，获得广泛好评。</p>
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left mb-6 md:mb-0 timeline-dot timeline-line md:ml-0 md:mr-auto pl-8 md:order-2 order-1">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2016年</h3>
-                            <p class="text-lg">成立个人音乐品牌"赋音乐"</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 2017年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 timeline-dot timeline-line md:ml-auto md:mr-0 pl-8">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2017年</h3>
-                            <p class="text-lg">获得第28届台湾金曲奖最佳国语男歌手奖</p>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>凭借专辑《JTW西游记》获得第28届台湾金曲奖最佳国语男歌手奖，业界一致认同其获奖实至名归，这是对他音乐才华的高度认可。</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2018年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 md:order-1 order-2 pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>推出系列绘本《艾美梦游》，展现了他在童书创作领域的才华。他为此专门创作了多首歌曲，延续母亲的教育梦想。</p>
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left mb-6 md:mb-0 timeline-dot timeline-line md:ml-0 md:mr-auto pl-8 md:order-2 order-1">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2018年</h3>
-                            <p class="text-lg">推出儿童绘本《艾美梦游》系列</p>
-                        </div>
-                    </div>
-                    
-                    <!-- 2024年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 timeline-dot timeline-line md:ml-auto md:mr-0 pl-8">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2024年</h3>
-                            <p class="text-lg">发行最后一张专辑《梦想家》</p>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>因病沉寂多年后推出充满真挚诚意的新专辑《梦想家》。这张专辑记录了他患病后又经历疫情、至亲离世的生命感悟，简约、嘶哑地唱出了"生"与梦想的意志。</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 2025年 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0 md:order-1 order-2 pl-8">
-                            <div class="bg-gradient-card p-6 rounded-lg border border-secondary/30 shadow-lg">
-                                <p>2025年2月21日早晨，方大同在对抗顽疾五年后因病去世，年仅41岁。他的音乐遗产和精神将永远留在歌迷心中。</p>
-                            </div>
-                        </div>
-                        <div class="md:w-1/2 md:pl-12 md:text-left mb-6 md:mb-0 timeline-dot timeline-line md:ml-0 md:mr-auto pl-8 md:order-2 order-1">
-                            <h3 class="text-2xl font-bold text-accent mb-2">2025年</h3>
-                            <p class="text-lg">方大同离世，享年41岁</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 专辑展示 -->
-    <section id="albums" class="py-20 bg-gradient-to-b from-gray-900 to-primary/90">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-accent">音乐作品</h2>
-            <p class="text-center text-lg mb-16 max-w-3xl mx-auto">
-                方大同的音乐作品融合了R&B、灵魂乐、爵士乐等多种风格，展现了他独特的音乐才华和创作理念
-            </p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <!-- 专辑1：Soulboy -->
-                <div class="album-card bg-gradient-to-br from-primary/40 to-secondary/40 rounded-xl overflow-hidden shadow-lg border border-accent/20 hover:shadow-2xl transition-all duration-300 hover:border-accent/40 backdrop-blur-sm group">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p3-doubao-search-sign.byteimg.com/labis/bf2388c8b7e1d4765d53bdc0a54f2b56~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=Z%2BSq89Kd0%2Fq2viH5Sw%2Bcb67mp%2Fs%3D" 
-                             alt="Soulboy" 
-                             class="album-cover w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-6">
-                            <h4 class="text-white font-bold text-xl mb-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">Soulboy</h4>
-                            <p class="text-gray-300 mb-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 transition-delay-75">2005年</p>
-                            <button class="play-album bg-accent hover:bg-accent/80 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 transition-delay-150" data-album="soulboy">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">Soulboy</h3>
-                        <p class="text-sm text-gray-300 mb-4">2005年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="春风吹" data-url="春风吹">
-                                <span>春风吹</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="每天每天" data-url="每天每天">
-                                <span>每天每天</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="南音" data-url="南音">
-                                <span>南音</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 专辑2：爱爱爱 -->
-                <div class="album-card bg-gradient-card rounded-xl overflow-hidden shadow-lg border border-secondary/30 hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p3-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_ccaddc5ec87d6611ee746b7bb9e91407_sx_50695_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=RufNySEDf9YjD6tV8snHCjGwMqU%3D" 
-                             alt="爱爱爱" 
-                             class="album-cover w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-primary/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button class="play-album bg-accent hover:bg-accent/80 text-primary rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300" data-album="aiiai">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">爱爱爱</h3>
-                        <p class="text-sm text-gray-300 mb-4">2006年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="爱爱爱" data-url="爱爱爱">
-                                <span>爱爱爱</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="四人游" data-url="四人游">
-                                <span>四人游 (feat. 薛凯琪)</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="苏丽珍" data-url="苏丽珍">
-                                <span>苏丽珍</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 专辑3：未来 -->
-                <div class="album-card bg-gradient-card rounded-xl overflow-hidden shadow-lg border border-secondary/30 hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_c9a79bc43cb2576e498e05fb7693c25b_sx_91452_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=grvecGW2idzjswd7JnZZg%2FyNtV4%3D" 
-                             alt="未来" 
-                             class="album-cover w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-primary/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button class="play-album bg-accent hover:bg-accent/80 text-primary rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300" data-album="future">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">未来</h3>
-                        <p class="text-sm text-gray-300 mb-4">2007年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="Love Song" data-url="https://music.163.com/song?id=82360">
-                                <span>Love Song</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="够不够" data-url="够不够">
-                                <span>够不够</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="未来" data-url="未来">
-                                <span>未来</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 专辑4：橙月 -->
-                <div class="album-card bg-gradient-card rounded-xl overflow-hidden shadow-lg border border-secondary/30 hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p3-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_1e6e8dec66ce006073e0885c161c5aed_sx_46322_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=ITZWmvTSrdoDXi%2BGCqxzjxoeCVE%3D" 
-                             alt="橙月" 
-                             class="album-cover w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-primary/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button class="play-album bg-accent hover:bg-accent/80 text-primary rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300" data-album="orange">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">橙月</h3>
-                        <p class="text-sm text-gray-300 mb-4">2008年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="三人游" data-url="三人游">
-                                <span>三人游</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="为你写的歌" data-url="为你写的歌">
-                                <span>为你写的歌</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="黑白" data-url="黑白">
-                                <span>黑白</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 专辑5：可啦思刻 -->
-                <div class="album-card bg-gradient-card rounded-xl overflow-hidden shadow-lg border border-secondary/30 hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p3-doubao-search-sign.byteimg.com/labis/bf2388c8b7e1d4765d53bdc0a54f2b56~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=Z%2BSq89Kd0%2Fq2viH5Sw%2Bcb67mp%2Fs%3D" 
-                             alt="可啦思刻" 
-                             class="album-cover w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-primary/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button class="play-album bg-accent hover:bg-accent/80 text-primary rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300" data-album="timeless">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">可啦思刻</h3>
-                        <p class="text-sm text-gray-300 mb-4">2009年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="红豆" data-url="红豆">
-                                <span>红豆</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="Nothing's Gonna Change My Love For You" data-url="https://music.163.com/song?id=82123">
-                                <span>Nothing's Gonna Change My Love For You</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="记得" data-url="记得">
-                                <span>记得</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 专辑6：15 -->
-                <div class="album-card bg-gradient-card rounded-xl overflow-hidden shadow-lg border border-secondary/30 hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p3-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_ccaddc5ec87d6611ee746b7bb9e91407_sx_50695_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=RufNySEDf9YjD6tV8snHCjGwMqU%3D" 
-                             alt="15" 
-                             class="album-cover w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-primary/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button class="play-album bg-accent hover:bg-accent/80 text-primary rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300" data-album="15">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">15</h3>
-                        <p class="text-sm text-gray-300 mb-4">2011年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="好不容易" data-url="好不容易">
-                                <span>好不容易</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="因为你" data-url="因为你">
-                                <span>因为你</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="Take Me" data-url="Take Me">
-                                <span>Take Me</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 专辑7：危险世界 -->
-                <div class="album-card bg-gradient-card rounded-xl overflow-hidden shadow-lg border border-secondary/30 hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_c9a79bc43cb2576e498e05fb7693c25b_sx_91452_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=grvecGW2idzjswd7JnZZg%2FyNtV4%3D" 
-                             alt="危险世界" 
-                             class="album-cover w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-primary/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button class="play-album bg-accent hover:bg-accent/80 text-primary rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300" data-album="danger">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">危险世界</h3>
-                        <p class="text-sm text-gray-300 mb-4">2014年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="特别的人" data-url="https://music.163.com/song?id=28403111">
-                                <span>特别的人</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="危险世界" data-url="危险世界">
-                                <span>危险世界</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="小方" data-url="小方">
-                                <span>小方</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 专辑8：梦想家 -->
-                <div class="album-card bg-gradient-card rounded-xl overflow-hidden shadow-lg border border-secondary/30 hover:shadow-2xl transition-all duration-300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://p3-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_1e6e8dec66ce006073e0885c161c5aed_sx_46322_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=ITZWmvTSrdoDXi%2BGCqxzjxoeCVE%3D" 
-                             alt="梦想家" 
-                             class="album-cover w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-primary/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button class="play-album bg-accent hover:bg-accent/80 text-primary rounded-full w-16 h-16 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300" data-album="dreamer">
-                                <i class="fa fa-play text-2xl"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-accent">梦想家</h3>
-                        <p class="text-sm text-gray-300 mb-4">2024年</p>
-                        <div class="space-y-2">
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="才二十三" data-url="才二十三">
-                                <span>才二十三</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="回留" data-url="回留">
-                                <span>回留</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                            <p class="text-sm flex justify-between items-center cursor-pointer hover:text-accent transition-colors duration-200 song-item" data-song="没啥好说" data-url="没啥好说">
-                                <span>没啥好说</span>
-                                <i class="fa fa-play-circle-o"></i>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 语录 -->
-    <section id="quotes" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-accent">方大同语录</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gradient-card p-8 rounded-xl border border-secondary/30 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <div class="text-accent text-4xl mb-4">
-                        <i class="fa fa-quote-left"></i>
-                    </div>
-                    <p class="text-lg mb-6 italic">
-                        "天下没有一个人是完美的，地下没有一个人是不含美德，让彼此有学习的空间，所有的答案也许会梦见。"
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/labis/caedb2695f10558042d65338ae204fc0~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=e1oP9kJdEnFwhX47t4yfNysLhCs%3D" 
-                             alt="方大同" 
-                             class="w-12 h-12 rounded-full object-cover mr-4">
-                        <div>
-                            <p class="font-bold text-accent">方大同</p>
-                            <p class="text-sm text-gray-400">《艾美梦游》</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gradient-card p-8 rounded-xl border border-secondary/30 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <div class="text-accent text-4xl mb-4">
-                        <i class="fa fa-quote-left"></i>
-                    </div>
-                    <p class="text-lg mb-6 italic">
-                        "生命中有万事的可能，你就是我要遇见的特别的人。"
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/labis/caedb2695f10558042d65338ae204fc0~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=e1oP9kJdEnFwhX47t4yfNysLhCs%3D" 
-                             alt="方大同" 
-                             class="w-12 h-12 rounded-full object-cover mr-4">
-                        <div>
-                            <p class="font-bold text-accent">方大同</p>
-                            <p class="text-sm text-gray-400">《特别的人》</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-gradient-card p-8 rounded-xl border border-secondary/30 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <div class="text-accent text-4xl mb-4">
-                        <i class="fa fa-quote-left"></i>
-                    </div>
-                    <p class="text-lg mb-6 italic">
-                        "成长是永远，离别是空悬，在千寻之外，我依然存在。"
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://p11-doubao-search-sign.byteimg.com/labis/caedb2695f10558042d65338ae204fc0~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=e1oP9kJdEnFwhX47t4yfNysLhCs%3D" 
-                             alt="方大同" 
-                             class="w-12 h-12 rounded-full object-cover mr-4">
-                        <div>
-                            <p class="font-bold text-accent">方大同</p>
-                            <p class="text-sm text-gray-400">《才二十三》</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="bg-primary py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center space-x-2">
-                        <i class="fa fa-music text-accent text-2xl"></i>
-                        <span class="text-xl font-bold text-accent">方大同音乐纪念</span>
-                    </div>
-                    <p class="text-gray-400 mt-2">
-                        用音乐传递爱与希望的永恒旋律
-                    </p>
-                </div>
-                
-                <div class="flex space-x-6">
-                    <a href="#" class="text-light hover:text-accent transition-colors duration-300">
-                        <i class="fa fa-weibo text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-light hover:text-accent transition-colors duration-300">
-                        <i class="fa fa-wechat text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-light hover:text-accent transition-colors duration-300">
-                        <i class="fa fa-instagram text-2xl"></i>
-                    </a>
-                    <a href="#" class="text-light hover:text-accent transition-colors duration-300">
-                        <i class="fa fa-youtube-play text-2xl"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <hr class="border-gray-700 my-8">
-            
-            <div class="text-center text-gray-400 text-sm">
-                <p>© 2026 方大同音乐纪念网站 | 本网站仅供纪念和学习使用</p>
-                <p class="mt-2">
-                    设计与开发：<span class="text-accent">音乐爱好者</span>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- 音乐播放器 -->
-    <div id="music-player" class="fixed bottom-0 left-0 w-full bg-gradient-to-r from-primary to-secondary bg-opacity-95 backdrop-blur-md border-t border-accent/20 shadow-lg z-50 transform translate-y-full transition-transform duration-300">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-3">
-                <div class="flex items-center space-x-4">
-                    <div class="w-14 h-14 rounded-md overflow-hidden flex-shrink-0 shadow-lg border border-accent/30">
-                        <img id="current-song-cover" src="https://p11-doubao-search-sign.byteimg.com/labis/caedb2695f10558042d65338ae204fc0~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=e1oP9kJdEnFwhX47t4yfNysLhCs%3D" 
-                             alt="当前歌曲封面" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h4 id="current-song-title" class="font-bold text-accent">歌曲名称</h4>
-                        <p id="current-song-artist" class="text-sm text-gray-300">方大同</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center space-x-6">
-                    <button id="prev-song" class="text-light hover:text-accent transition-colors duration-300 transform hover:scale-110">
-                        <i class="fa fa-step-backward text-xl"></i>
-                    </button>
-                    <button id="play-pause-btn" class="bg-accent hover:bg-accent/80 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg shadow-accent/20 transition-all duration-300 transform hover:scale-105">
-                        <i class="fa fa-play text-xl"></i>
-                    </button>
-                    <button id="next-song" class="text-light hover:text-accent transition-colors duration-300 transform hover:scale-110">
-                        <i class="fa fa-step-forward text-xl"></i>
-                    </button>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <div class="hidden md:flex items-center space-x-2">
-                        <span id="current-time" class="text-xs text-gray-300">0:00</span>
-                        <div class="w-48 md:w-64 bg-gray-700/50 rounded-full h-2">
-                            <div id="progress-bar" class="bg-gradient-to-r from-accent to-pink-400 h-2 rounded-full" style="width: 0%"></div>
-                        </div>
-                        <span id="total-time" class="text-xs text-gray-300">0:00</span>
-                    </div>
-                    <button id="close-player" class="text-light hover:text-accent transition-colors duration-300 transform hover:scale-110">
-                        <i class="fa fa-times text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+  <nav class="nav" id="nav">
+    <div class="nav-in">
+      <a class="nav-mark" href="#top">方大同</a>
+      <div class="nav-links">
+        <a href="#life">生平</a>
+        <a href="#works">作品</a>
+        <a href="#honors">荣誉</a>
+        <a href="#words">摘句</a>
+      </div>
     </div>
+  </nav>
 
-    <!-- JavaScript -->
-    <script>
-        // 页面加载完成后执行
-        document.addEventListener('DOMContentLoaded', function() {
-            // 移动端菜单切换
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // 平滑滚动
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                        
-                        // 如果是移动端，点击后关闭菜单
-                        if (window.innerWidth < 768) {
-                            mobileMenu.classList.add('hidden');
-                        }
-                    }
-                });
-            });
-            
-            // 音乐播放器功能
-            const musicPlayer = document.getElementById('music-player');
-            const playPauseBtn = document.getElementById('play-pause-btn');
-            const closePlayerBtn = document.getElementById('close-player');
-            const currentSongTitle = document.getElementById('current-song-title');
-            const currentSongArtist = document.getElementById('current-song-artist');
-            const currentSongCover = document.getElementById('current-song-cover');
-            const progressBar = document.getElementById('progress-bar');
-            const currentTimeDisplay = document.getElementById('current-time');
-            const totalTimeDisplay = document.getElementById('total-time');
-            const prevSongBtn = document.getElementById('prev-song');
-            const nextSongBtn = document.getElementById('next-song');
-            
-            // 真实歌曲数据 - 使用GitHub Pages上的音频文件
-            const songs = [
-                {
-                    title: "Love Song",
-                    artist: "方大同",
-                    album: "未来",
-                    cover: "https://p11-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_c9a79bc43cb2576e498e05fb7693c25b_sx_91452_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=grvecGW2idzjswd7JnZZg%2FyNtV4%3D",
-                    url: "https://cdn.jsdelivr.net/gh/wayou/wayou.github.io/songs/mp3/Jim%20Brickman%20-%20Destiny.mp3", // 示例音频
-                    duration: "3:30"
-                },
-                {
-                    title: "特别的人",
-                    artist: "方大同",
-                    album: "危险世界",
-                    cover: "https://p11-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_c9a79bc43cb2576e498e05fb7693c25b_sx_91452_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=grvecGW2idzjswd7JnZZg%2FyNtV4%3D",
-                    url: "https://cdn.jsdelivr.net/gh/wayou/wayou.github.io/songs/mp3/Jim%20Brickman%20-%20If%20You%20Believe.mp3", // 示例音频
-                    duration: "4:05"
-                },
-                {
-                    title: "爱爱爱",
-                    artist: "方大同",
-                    album: "爱爱爱",
-                    cover: "https://p3-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_ccaddc5ec87d6611ee746b7bb9e91407_sx_50695_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=RufNySEDf9YjD6tV8snHCjGwMqU%3D",
-                    url: "https://cdn.jsdelivr.net/gh/wayou/wayou.github.io/songs/mp3/Jim%20Brickman%20-%20Serenade.mp3", // 示例音频
-                    duration: "3:45"
-                },
-                {
-                    title: "三人游",
-                    artist: "方大同",
-                    album: "橙月",
-                    cover: "https://p3-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_1e6e8dec66ce006073e0885c161c5aed_sx_46322_www800-800~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=ITZWmvTSrdoDXi%2BGCqxzjxoeCVE%3D",
-                    url: "https://cdn.jsdelivr.net/gh/wayou/wayou.github.io/songs/mp3/Jim%20Brickman%20-%20Valentine.mp3", // 示例音频
-                    duration: "4:10"
-                },
-                {
-                    title: "春风吹",
-                    artist: "方大同",
-                    album: "Soulboy",
-                    cover: "https://p3-doubao-search-sign.byteimg.com/labis/bf2388c8b7e1d4765d53bdc0a54f2b56~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=Z%2BSq89Kd0%2Fq2viH5Sw%2Bcb67mp%2Fs%3D",
-                    url: "https://cdn.jsdelivr.net/gh/wayou/wayou.github.io/songs/mp3/Jim%20Brickman%20-%20Your%20Love.mp3", // 示例音频
-                    duration: "3:55"
-                }
-            ];
-            
-            // 创建音频元素
-            let audioElement = new Audio();
-            
-            let currentSongIndex = 0;
-            let isPlaying = false;
-            let progressInterval;
-            
-            // 随机选择一首歌自动播放
-            function autoPlayRandomSong() {
-                currentSongIndex = Math.floor(Math.random() * songs.length);
-                playSong(currentSongIndex);
-            }
-            
-            // 播放指定歌曲
-            function playSong(index) {
-                const song = songs[index];
-                
-                // 更新播放器信息
-                currentSongTitle.textContent = song.title;
-                currentSongArtist.textContent = song.artist;
-                currentSongCover.src = song.cover;
-                
-                // 显示播放器
-                musicPlayer.classList.remove('translate-y-full');
-                
-                // 停止当前播放的音频
-                if (audioElement.src) {
-                    audioElement.pause();
-                    audioElement.currentTime = 0;
-                }
-                
-                // 设置新的音频源并播放
-                audioElement.src = song.url;
-                audioElement.play().then(() => {
-                    isPlaying = true;
-                    playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
-                }).catch(error => {
-                    console.error('播放失败:', error);
-                    isPlaying = false;
-                    playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
-                    alert('歌曲播放失败，请稍后再试');
-                });
-                
-                // 更新进度条和时间显示
-                updateProgressBar();
-            }
-            
-            // 更新进度条
-            function updateProgressBar() {
-                // 清除之前的定时器
-                clearInterval(progressInterval);
-                
-                // 监听音频事件
-                audioElement.addEventListener('loadedmetadata', () => {
-                    // 更新总时长显示
-                    const duration = audioElement.duration;
-                    const minutes = Math.floor(duration / 60);
-                    const seconds = Math.floor(duration % 60);
-                    totalTimeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                });
-                
-                audioElement.addEventListener('timeupdate', () => {
-                    // 更新进度条
-                    const progress = (audioElement.currentTime / audioElement.duration) * 100;
-                    progressBar.style.width = `${progress}%`;
-                    
-                    // 更新当前时间显示
-                    const currentMinutes = Math.floor(audioElement.currentTime / 60);
-                    const currentSeconds = Math.floor(audioElement.currentTime % 60);
-                    currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
-                });
-                
-                audioElement.addEventListener('ended', () => {
-                    // 歌曲播放结束，播放下一首
-                    nextSong();
-                });
-                
-                audioElement.addEventListener('error', (e) => {
-                    console.error('音频播放错误:', e);
-                    isPlaying = false;
-                    playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
-                    alert('音频播放出错，请稍后再试');
-                });
-            }
-            
-            // 播放/暂停切换
-            function togglePlayPause() {
-                if (isPlaying) {
-                    // 暂停
-                    audioElement.pause();
-                    isPlaying = false;
-                    playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
-                } else {
-                    // 播放
-                    audioElement.play().then(() => {
-                        isPlaying = true;
-                        playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
-                    }).catch(error => {
-                        console.error('播放失败:', error);
-                        alert('歌曲播放失败，请稍后再试');
-                    });
-                }
-            }
-            
-            // 上一首
-            function prevSong() {
-                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-                playSong(currentSongIndex);
-            }
-            
-            // 下一首
-            function nextSong() {
-                currentSongIndex = (currentSongIndex + 1) % songs.length;
-                playSong(currentSongIndex);
-            }
-            
-            // 关闭播放器
-            function closePlayer() {
-                clearInterval(progressInterval);
-                musicPlayer.classList.add('translate-y-full');
-            }
-            
-            // 绑定事件
-            playPauseBtn.addEventListener('click', togglePlayPause);
-            closePlayerBtn.addEventListener('click', closePlayer);
-            prevSongBtn.addEventListener('click', prevSong);
-            nextSongBtn.addEventListener('click', nextSong);
-            
-            // 歌曲项点击事件
-            document.querySelectorAll('.song-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const songTitle = this.getAttribute('data-song');
-                    const songUrl = this.getAttribute('data-url');
-                    
-                    // 查找歌曲索引
-                    const songIndex = songs.findIndex(song => song.title === songTitle);
-                    
-                    if (songIndex !== -1) {
-                        currentSongIndex = songIndex;
-                        playSong(currentSongIndex);
-                    } else {
-                        // 如果找不到歌曲，创建新的歌曲对象
-                        const newSong = {
-                            title: songTitle,
-                            artist: "方大同",
-                            album: "未知专辑",
-                            cover: "https://p11-doubao-search-sign.byteimg.com/labis/caedb2695f10558042d65338ae204fc0~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1792075563&x-signature=e1oP9kJdEnFwhX47t4yfNysLhCs%3D",
-                            url: songUrl,
-                            duration: "3:30"
-                        };
-                        
-                        songs.push(newSong);
-                        currentSongIndex = songs.length - 1;
-                        playSong(currentSongIndex);
-                    }
-                });
-            });
-            
-            // 专辑播放按钮点击事件
-            document.querySelectorAll('.play-album').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const albumId = this.getAttribute('data-album');
-                    
-                    // 根据专辑ID选择歌曲
-                    let albumSongs = [];
-                    
-                    switch(albumId) {
-                        case 'soulboy':
-                            albumSongs = songs.filter(song => song.album === "Soulboy" || song.title === "春风吹");
-                            break;
-                        case 'aiiai':
-                            albumSongs = songs.filter(song => song.album === "爱爱爱" || song.title === "爱爱爱");
-                            break;
-                        case 'future':
-                            albumSongs = songs.filter(song => song.album === "未来" || song.title === "Love Song");
-                            break;
-                        case 'orange':
-                            albumSongs = songs.filter(song => song.album === "橙月" || song.title === "三人游");
-                            break;
-                        case 'timeless':
-                            albumSongs = songs.filter(song => song.album === "可啦思刻" || song.title === "红豆");
-                            break;
-                        case '15':
-                            albumSongs = songs.filter(song => song.album === "15" || song.title === "好不容易");
-                            break;
-                        case 'danger':
-                            albumSongs = songs.filter(song => song.album === "危险世界" || song.title === "特别的人");
-                            break;
-                        case 'dreamer':
-                            albumSongs = songs.filter(song => song.album === "梦想家" || song.title === "才二十三");
-                            break;
-                        default:
-                            albumSongs = songs;
-                    }
-                    
-                    if (albumSongs.length > 0) {
-                        // 随机选择专辑中的一首歌
-                        const randomIndex = Math.floor(Math.random() * albumSongs.length);
-                        const selectedSong = albumSongs[randomIndex];
-                        
-                        // 查找这首歌在songs数组中的索引
-                        const songIndex = songs.findIndex(song => song.title === selectedSong.title);
-                        
-                        if (songIndex !== -1) {
-                            currentSongIndex = songIndex;
-                            playSong(currentSongIndex);
-                        }
-                    }
-                });
-            });
-            
-            // 页面加载后自动播放随机歌曲
-            setTimeout(autoPlayRandomSong, 2000);
-            
-            // 音乐可视化效果
-            const musicWave = document.querySelector('.music-wave');
-            
-            function animateMusicWave() {
-                if (isPlaying) {
-                    musicWave.classList.add('opacity-100');
-                } else {
-                    musicWave.classList.remove('opacity-100');
-                }
-            }
-            
-            // 定期更新音乐可视化效果
-            setInterval(animateMusicWave, 500);
-        });
-    </script>
+  <!-- ================= 封面 ================= -->
+  <header class="hero" id="top">
+    <div class="wrap">
+      <p class="hero-kicker">In Memory</p>
+      <h1>方大同</h1>
+      <p class="hero-latin">Khalil Fong</p>
+      <p class="hero-dates">1983.07.14 <span>—</span> 2025.02.21</p>
+      <p class="hero-line">
+        他把灵魂乐带进华语流行，用普通话和英语唱歌，<br class="br-wide">
+        成了香港乐坛最特别的一个声音。
+      </p>
+      <hr class="rule">
+    </div>
+  </header>
+
+  <!-- ================= 序 ================= -->
+  <section id="foreword">
+    <div class="wrap prose rise">
+      <div class="sec-head">
+        <span class="sec-num">序</span>
+        <h2>写在前面</h2>
+      </div>
+      <p class="lead">
+        父亲是鼓手，他从小在酒吧里长大。十七岁那年走进唱片公司，当场把 Demo 放给制作人听，
+        签了下来——却被安排做了三年幕后，替别人写歌。
+      </p>
+      <p>
+        后来他走到台前，写了十张专辑，把 R&amp;B、蓝调、爵士和中国风揉在一起。
+        他不太会说粤语，却用普通话和英语作品打开了香港市场；
+        他不是那种最喧闹的歌手，但很多人第一次听《Love Song》的时候，
+        就记住了那个戴黑框眼镜、声音干净的人。
+      </p>
+      <p>
+        2010 年，他因为操劳过度出现气胸，数度住院。此后十几年，身体始终是他要一起上台的东西。
+        2024 年他带着《梦想家》回来，说"终于从抱恙的日子走上了康复之路"——
+        那张专辑录在生病的不同阶段里，有些片段能听见明显的沙哑。
+      </p>
+      <p>
+        2025 年 2 月 21 日早晨，在对抗顽疾五年之后，他安静地离开了，41 岁。
+        他留下的音乐和图画小说，还在被人反复打开。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 生平 ================= -->
+  <section id="life">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <span class="sec-num">一</span>
+        <h2>生平</h2>
+        <p>按时间顺序，只记与音乐有关的事。</p>
+      </div>
+
+      <div class="era rise">
+        <p class="era-title">早年</p>
+        <ul class="tl">
+          <li class="key"><time>1983 · 7月14日</time><p>出生于美国夏威夷州。父亲是职业鼓手，音乐是他最早接触到的东西。</p></li>
+          <li><time>约 6 岁</time><p>随父母移居上海，在当地读小学。刚开学的那几个月他完全听不懂中文，几乎一直在睡觉；后来学了三年中国武术和太极。</p></li>
+          <li><time>约 12 岁</time><p>举家迁往广州。此后他没有再上学，由父亲按美国的函授课程教他英文，也常被带进不同的酒吧演唱，攒下大量演出经验。</p></li>
+          <li><time>1998</time><p>一家人在香港定居。同年，15 岁的他第一次把自己的 Demo 寄给唱片公司，收到回音后兴冲冲去面谈，却被以"年龄太小"婉拒。此后被拒绝成了常事。</p></li>
+          <li><time>2000</time><p>17 岁，他走进最向往的华纳音乐。看到自己寄来的样品在制作人桌上落满灰尘，他鼓起勇气请对方当场听完——听完，就签了。但公司只让他做幕后。</p></li>
+          <li><time>2000 — 2005</time><p>三年幕后音乐人，为刘德华、张学友、陈坤等人写歌。他始终想走到台前，公司却认为他没有歌手潜质。后来郑秀文专门去找华纳音乐总监替他说情，公司才终于松口，愿意为他制作专辑。</p></li>
+        </ul>
+      </div>
+
+      <div class="era rise">
+        <p class="era-title">出道与高峰</p>
+        <ul class="tl">
+          <li class="key"><time>2005 · 11月</time><p>首张个人专辑《SoulBoy》发行，正式出道。专辑以"世界大同"为主题，他想用灵魂乐去融合华语音乐的底子。凭这张专辑，他拿到叱咤乐坛生力军男歌手奖（银奖）。</p></li>
+          <li><time>2006 · 12月</time><p>第二张专辑《爱爱爱》。除一首英文翻唱外，词曲几乎全由他自己包办，被乐评人认为华语乐坛最纯正的 R&amp;B 专辑之一。</p></li>
+          <li><time>2007 · 12月28日</time><p>第三张专辑《未来》发行，收录《Love Song》《够不够》《未来》等 11 首。主打《Love Song》登上各大排行榜冠军，他也凭这张专辑首度提名金曲奖最佳国语男歌手。</p></li>
+          <li><time>2008 · 12月</time><p>第四张专辑《橙月》。他在这一张里开始写更简单、更上口的歌，主题是黄昏式的浪漫。</p></li>
+          <li class="key"><time>2009 · 1月1日</time><p>叱咤乐坛流行榜颁奖典礼上，他同时拿下"叱咤乐坛男歌手奖（金奖）""叱咤乐坛唱作人奖（金奖）"和"叱咤乐坛作曲人奖"，成为当时男歌手金奖最年轻的得主。</p></li>
+          <li><time>2009 · 8月</time><p>第五张专辑《可啦思刻》（Timeless）——翻唱并改编那些带他爱上音乐、成为歌手的歌。</p></li>
+          <li><time>2010</time><p>因操劳过度出现气胸（爆肺），数度住院。同年凭《三人游》获十大中文金曲"优秀流行国语歌曲奖"，并在电影《恋爱通告》中本色客串一名歌手。</p></li>
+          <li><time>2011 · 2月</time><p>与李健、萧敬腾组成"新势力组合"登上央视春晚，现场演唱《爱爱爱》。</p></li>
+          <li><time>2011 · 4月</time><p>第六张专辑《15》——名字是纪念他 15 岁开始学吉他，整张回归蓝调，比他以往更复古。</p></li>
+          <li><time>2012 · 12月</time><p>第七张专辑《回到未来》，与五年前的《未来》遥相呼应，把前几张的元素重新拼贴一次。</p></li>
+          <li><time>2013</time><p>投入全部积蓄成立个人录音室 Lightroom Studio，并成立自己的经纪公司 GNOF。年底启动首轮世界巡回演唱会 SoulBoy Lights Up，首场在红馆。</p></li>
+          <li><time>2014 · 4月</time><p>第八张专辑《危险世界》，16 首，融入大量嘻哈元素，是他风格转折的一张；他也凭此入围第 26 届金曲奖最佳国语男歌手。</p></li>
+        </ul>
+      </div>
+
+      <div class="era rise">
+        <p class="era-title">自立门户，与那座奖</p>
+        <ul class="tl">
+          <li class="key"><time>2016 · 4月</time><p>自立门户，成立个人独立音乐厂牌"赋音乐"（FU MUSIC），同一年也开始运作影视厂牌"赋影视"。</p></li>
+          <li><time>2016 · 9月28日</time><p>第九张专辑《JTW 西游记》发行，筹备超过两年半，21 首，以黑金双碟呈现——黑碟摩登、金碟经典。</p></li>
+          <li class="key"><time>2017 · 6月</time><p>凭《JTW 西游记》获得第 28 届台湾金曲奖"最佳国语男歌手奖"。多年入围，这是他首度拿下这个奖。</p></li>
+          <li><time>2017 · 12月</time><p>推出首部原创儿童绘本《艾美梦游》，开始涉足儿童教育，并为它写了主题曲。</p></li>
+          <li><time>2019</time><p>举行"TIO 灵心之子"巡回演唱会，唱进红馆与台北小巨蛋。同年发行单曲《白发》。</p></li>
+          <li><time>2020 · 6月</time><p>发行迷你专辑《宅这 Home Sweet Home》，由《Favorite Stuff》《面面》《头发有点长》组成"宅家三部曲"。</p></li>
+          <li><time>2021 · 8月</time><p>凭单曲《面面》获第 32 届台湾金曲奖"最佳单曲制作人奖"。同年 11 月，他首度担任制片人的电影《指引》上映。</p></li>
+          <li><time>2022</time><p>发行单曲《清楚点》后，逐渐淡出公众视野。</p></li>
+        </ul>
+      </div>
+
+      <div class="era rise">
+        <p class="era-title">最后</p>
+        <ul class="tl">
+          <li class="key"><time>2024 · 7月14日</time><p>生日当天，他在社交平台宣布回归，说自己"终于从抱恙的日子走上了康复之路"。</p></li>
+          <li><time>2024 · 8月</time><p>发行回归后的第一支单曲《才二十三》，写时间的流逝与衰老的必然。</p></li>
+          <li class="key"><time>2024 · 10月18日</time><p>第十张专辑《梦想家》（The Dreamer）发行，10 首，录制于他生病的不同阶段。他说想做一张能给人带来安慰的专辑。这也是他生前最后一张专辑。</p></li>
+          <li><time>2025 · 2月</time><p>推出《那沙漠里的水》的音乐视频并转发——这是他在社交平台上的最后一条动态。</p></li>
+          <li class="key"><time>2025 · 2月21日</time><p>早晨，在对抗顽疾五年之后离开，终年 41 岁。3 月 1 日，赋音乐对外公布消息：他所留下的音乐与图画小说，是永恒的精神财富。</p></li>
+          <li><time>2025 · 6月28日</time><p>第 36 届台湾金曲奖：《梦想家》获"评审团奖"，他凭《才二十三》被追颁"最佳作曲人奖"。</p></li>
+          <li><time>2025 · 11月</time><p>因音乐创作上的成就，被列入国际词曲作者协会（ISA）"词曲作者名人堂"。</p></li>
+          <li><time>2026 · 3月1日</time><p>离世一周年，《才二十三》音乐视频上线——一支关于长途公路的 MV，被视为他"最后的告别"。</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 作品 ================= -->
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <span class="sec-num">二</span>
+        <h2>作品</h2>
+        <p>十张录音室专辑，按发行顺序。</p>
+      </div>
+
+      <div class="works rise">
+        <article class="work">
+          <div class="work-y">2005</div>
+          <div><h3>SoulBoy <small>SOUL BOY</small></h3>
+          <p>首张专辑，也是他的出道作。以"世界大同"为题，把流行于黑人音乐里的灵魂乐，接到华语流行的底子上。很多人从这里第一次听见他。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2006</div>
+          <div><h3>爱爱爱 <small>LOVE LOVE LOVE</small></h3>
+          <p>第二张。除一首英文翻唱外，词曲几乎全由他包办。题材收窄到爱情与家庭，却写得别辟蹊径；同名主打与《四人游》都成了长期被点唱的歌。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2007</div>
+          <div><h3>未来 <small>WONDERLAND</small></h3>
+          <p>第三张，11 首。整张以蓝色为主调，从环保概念出发。主打《Love Song》登上各大排行榜冠军，让他首度入围金曲奖最佳国语男歌手。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2008</div>
+          <div><h3>橙月 <small>ORANGE MOON</small></h3>
+          <p>第四张。他说黄昏迎合了这张专辑的浪漫主题，所以叫"橙月"。在这里他开始试着写更简单、更上口的旋律。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2009</div>
+          <div><h3>可啦思刻 <small>TIMELESS</small></h3>
+          <p>第五张，一张翻唱专辑。《红豆》《月亮代表我的心》《Nothing's Gonna Change My Love for You》——都是引领他爱上音乐、成为歌手的歌。他没有想着挑战或突破，只是按自己理解的方式重新唱了一遍。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2011</div>
+          <div><h3>15 <small>FIFTEEN</small></h3>
+          <p>第六张。名字是他 15 岁开始学吉他的纪念。整张以蓝调为主导，比他以往更复古，被认为是一张聆听他的"试金石"。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2012</div>
+          <div><h3>回到未来 <small>BACK TO WONDERLAND</small></h3>
+          <p>第七张，与五年前的《未来》遥相呼应：既回到早期的 R&amp;B 与灵魂乐，也容纳了后几张的风格尝试，像一次对过往元素的拼贴。制作期间他几乎全年无休。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2014</div>
+          <div><h3>危险世界 <small>DANGEROUS WORLD</small></h3>
+          <p>第八张，16 首，也是他成立 GNOF 后推出的第一张。融入大量嘻哈元素，被视为风格转折；专辑视觉与两支 MV 都由他亲自操刀，内容涉及保护地球等议题。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2016</div>
+          <div><h3>JTW 西游记 <small>JOURNEY TO THE WEST</small></h3>
+          <p>第九张，筹备超过两年半，21 首，黑金双碟——黑碟摩登、金碟经典，并邀六组音乐人各合作一首。凭这张专辑，他终于拿下第 28 届金曲奖最佳国语男歌手。</p></div>
+        </article>
+
+        <article class="work">
+          <div class="work-y">2024</div>
+          <div><h3>梦想家 <small>THE DREAMER</small></h3>
+          <p>第十张，也是最后一张，10 首。录在他生病的不同阶段，有些片段能听见明显的沙哑。他说想做一张能给人带来安慰的专辑——所以还在康复阶段，他还是决定回来。</p></div>
+        </article>
+      </div>
+
+      <div class="sec-head rise" style="margin-top:64px;">
+        <h2 style="font-size:20px;letter-spacing:.12em;">常被点起的歌</h2>
+      </div>
+      <ul class="songs rise">
+        <li>春风吹</li><li>南音</li><li>爱爱爱</li><li>四人游</li><li>Love Song</li>
+        <li>够不够</li><li>未来</li><li>三人游</li><li>如果爱</li><li>红豆</li>
+        <li>好不容易</li><li>为你写的歌</li><li>千纸鹤</li><li>BB88</li><li>特别的人</li>
+        <li>危险世界</li><li>悟空</li><li>Flow</li><li>很不低调</li><li>白发</li>
+        <li>面面</li><li>Favorite Stuff</li><li>清楚点</li><li>回留</li><li>才二十三</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 荣誉 ================= -->
+  <section id="honors">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <span class="sec-num">三</span>
+        <h2>荣誉</h2>
+        <p>只列其中一部分。</p>
+      </div>
+      <ul class="honors rise">
+        <li><b>2005</b><span>叱咤乐坛流行榜颁奖典礼 · 叱咤乐坛生力军男歌手奖（银奖）</span></li>
+        <li><b>2008</b><span>新城国语力颁奖礼 · 新城国语力男歌手奖、创作歌手奖</span></li>
+        <li><b>2009</b><span>叱咤乐坛流行榜颁奖典礼 · 男歌手金奖、唱作人金奖、作曲人奖（三项同届）</span></li>
+        <li><b>2009</b><span>第 9 届华语音乐传媒大奖 · 最佳国语男歌手奖</span></li>
+        <li><b>2011</b><span>叱咤乐坛流行榜颁奖典礼 · 叱咤乐坛至尊唱片奖（《15》）</span></li>
+        <li><b>2017</b><span>第 28 届台湾金曲奖 · 最佳国语男歌手奖（《JTW 西游记》）</span></li>
+        <li><b>2017</b><span>第 28 届台湾金曲奖 · 最佳作曲人奖</span></li>
+        <li><b>2021</b><span>第 32 届台湾金曲奖 · 最佳单曲制作人奖（《面面》）</span></li>
+        <li><b>2025</b><span>第 36 届台湾金曲奖 · 评审团奖（《梦想家》）／最佳作曲人奖（《才二十三》，追颁）</span></li>
+        <li><b>2025</b><span>国际词曲作者协会（ISA）· 词曲作者名人堂</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 摘句 ================= -->
+  <section id="words">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <span class="sec-num">四</span>
+        <h2>摘句</h2>
+      </div>
+      <div class="quote rise">
+        <blockquote>生命中有万事的可能，你就是我要遇见的特别的人。</blockquote>
+        <cite>《特别的人》</cite>
+      </div>
+      <div class="quote rise">
+        <blockquote>成长是永远，离别是空悬，在千寻之外，我依然存在。</blockquote>
+        <cite>《才二十三》</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 尾声 ================= -->
+  <div class="coda">
+    <div class="wrap rise">
+      <p class="mark">方大同</p>
+      <p>1983.07.14 — 2025.02.21</p>
+      <hr class="rule" style="margin:34px auto 0;">
+      <p style="margin-top:34px;">音乐还在被播放，就没有真的离开。</p>
+    </div>
+  </div>
+
+  <!-- ================= 页脚 ================= -->
+  <footer>
+    <div class="wrap">
+      <p>
+        本页为非营利的个人纪念页。生平与作品信息参考公开资料整理，
+        主要来源：<a href="https://baike.baidu.com/item/%E6%96%B9%E5%A4%A7%E5%90%8C/5197904" target="_blank" rel="noopener">百度百科「方大同」词条</a>、
+        中国日报／中国新闻网关于其离世的报道，以及赋音乐（FU MUSIC）公告。
+      </p>
+      <p>
+        歌词摘句版权归原作者及版权方所有，此处仅作纪念引用。
+        方大同的音乐与图画小说，版权归其本人及赋音乐所有。
+      </p>
+      <p class="fnote">如果你发现任何事实错误，请告诉我，我会立刻更正。</p>
+    </div>
+  </footer>
+
+  <a class="top" id="toTop" href="#top" aria-label="回到顶部">↑</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var nav   = document.getElementById("nav");
+  var toTop = document.getElementById("toTop");
+  var rises = Array.prototype.slice.call(document.querySelectorAll(".rise"));
+
+  /* 滚动：导航底线 + 回到顶部按钮 */
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      nav.classList.toggle("is-stuck", y > 12);
+      toTop.classList.toggle("show", y > 640);
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* 入场：逐个淡入，延迟按出现顺序错开 */
+  var reduce = window.matchMedia &&
+               window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduce || !("IntersectionObserver" in window)) {
+    rises.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      var batch = 0;
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        el.style.transitionDelay = (batch++ * 70) + "ms";
+        el.classList.add("in");
+        io.unobserve(el);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    rises.forEach(function (el) { io.observe(el); });
+  }
+
+  /* 兜底：无论 IntersectionObserver 是否正常回调，2.5 秒后一律显示。
+     绝不把正文永久藏起来——纪念页的内容必须始终读得到。 */
+  window.setTimeout(function () {
+    rises.forEach(function (el) { el.classList.add("in"); });
+  }, 2500);
+
+  /* 平滑锚点：给不支持 scroll-behavior 的浏览器兜底 */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      var id = a.getAttribute("href");
+      if (id.length < 2) return;
+      var t = document.querySelector(id);
+      if (!t) return;
+      ev.preventDefault();
+      var top = t.getBoundingClientRect().top + window.pageYOffset - 18;
+      window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+      if (history.replaceState) history.replaceState(null, "", id);
+    });
+  });
+})();
+</script>
 </body>
 </html>
