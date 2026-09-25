@@ -299,6 +299,82 @@
   footer a:hover{ color:var(--accent); border-bottom-color:var(--accent-2); }
   footer .fnote{ margin:18px 0 0; color:#9A948A; }
 
+  /* ---------- 听 · 看（B 站视频卡） ---------- */
+  .videos{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:26px 22px;
+    margin:0 0 34px;
+  }
+  @media (max-width:640px){ .videos{ grid-template-columns:1fr; gap:22px; } }
+
+  .vi{ margin:0; }
+  .vi-frame{
+    position:relative; aspect-ratio:16/9; overflow:hidden;
+    background:var(--paper-2); border:1px solid var(--rule);
+    cursor:pointer; transition:border-color .25s ease;
+  }
+  .vi-frame:hover{ border-color:var(--accent-2); }
+  .vi-frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .5s cubic-bezier(.22,.61,.36,1), opacity .3s;
+  }
+  .vi-frame:hover img{ transform:scale(1.025); }
+
+  /* 播放键：纯 CSS 三角，无图片 */
+  .vi-play{
+    position:absolute; inset:0; display:grid; place-items:center;
+    background:linear-gradient(180deg, rgba(26,25,23,0) 45%, rgba(26,25,23,.34));
+    transition:background .25s ease;
+  }
+  .vi-play::after{
+    content:""; width:52px; height:52px; border-radius:50%;
+    background:rgba(251,249,246,.92);
+    box-shadow:0 2px 14px rgba(26,25,23,.22);
+    background-image:linear-gradient(0deg,transparent,transparent);
+    position:absolute;
+  }
+  .vi-play::before{
+    content:""; z-index:1; margin-left:5px;
+    border-style:solid; border-width:9px 0 9px 15px;
+    border-color:transparent transparent transparent var(--ink);
+  }
+  .vi-frame:hover .vi-play{ background:linear-gradient(180deg, rgba(26,25,23,0) 35%, rgba(26,25,23,.42)); }
+
+  .vi-frame iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0; display:block;
+  }
+
+  .vi-meta{ padding:12px 2px 0; }
+  .vi-meta h3{
+    margin:0 0 6px; font-size:16px; line-height:1.6;
+    letter-spacing:.03em; font-weight:500; color:var(--ink);
+  }
+  .vi-meta p{
+    margin:0; font-family:var(--sans); font-size:12px;
+    letter-spacing:.04em; color:var(--ink-3); line-height:1.7;
+  }
+  .vi-meta .vi-up{ color:var(--accent); }
+  .vi-frame.no-cover{ background:
+      linear-gradient(135deg, var(--paper-2), #EDE8E0); }
+
+  /* 音乐平台链接 */
+  .listen{
+    display:flex; flex-wrap:wrap; gap:10px; margin:0; padding:0; list-style:none;
+  }
+  .listen a{
+    display:inline-block; font-family:var(--sans); font-size:13px; letter-spacing:.05em;
+    color:var(--ink-2); text-decoration:none; padding:8px 16px;
+    border:1px solid var(--rule); border-radius:4px;
+    transition:border-color .25s, color .25s, background .25s;
+  }
+  .listen a:hover{ color:var(--accent); border-color:var(--accent-2); background:#fff; }
+
+  .src-note{
+    margin:30px 0 0; padding:16px 18px;
+    background:var(--paper-2); border-left:2px solid var(--accent-2);
+    font-family:var(--sans); font-size:12.5px; line-height:1.95; color:var(--ink-3);
+  }
+  .src-note b{ color:var(--ink-2); font-weight:500; }
+
   /* ---------- 入场动画（渐进增强）----------
      默认状态下内容完全可见；只有 JS 正常运行时才加上 .js，
      才会先隐藏再由 IntersectionObserver 淡入。
@@ -340,6 +416,7 @@
       <div class="nav-links">
         <a href="#life">生平</a>
         <a href="#works">作品</a>
+        <a href="#watch">听·看</a>
         <a href="#honors">荣誉</a>
         <a href="#words">摘句</a>
       </div>
@@ -543,11 +620,139 @@
     </div>
   </section>
 
+  <!-- ================= 听 · 看 ================= -->
+  <section id="watch">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <span class="sec-num">三</span>
+        <h2>听 · 看</h2>
+        <p>点击封面即在本页播放。视频托管于 B 站，版权归原作者及权利人所有。</p>
+      </div>
+
+      <div class="videos rise">
+        <article class="vi" data-bvid="BV1wM4m1Y7Ly">
+          <div class="vi-frame">
+            <img src="https://i1.hdslb.com/bfs/archive/ec1164326d1fdd75331d2dc03b4288546c49d06f.jpg"
+                 alt="方大同《Love Song》万人大合唱现场" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>《Love Song》万人大合唱现场</h3>
+            <p><span class="vi-up">音乐私藏馆</span> · 5:45 · 998 万播放</p>
+          </div>
+        </article>
+
+        <article class="vi" data-bvid="BV1N9XXYAEqp">
+          <div class="vi-frame">
+            <img src="https://i0.hdslb.com/bfs/archive/b3b68ada47f8dbb8d79b6fc463af72efd9837314.jpg"
+                 alt="方大同《爱爱爱》《三人游》现场" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>《爱爱爱》《三人游》神级现场</h3>
+            <p><span class="vi-up">音乐私藏馆</span> · 7:52 · 378 万播放</p>
+          </div>
+        </article>
+
+        <article class="vi" data-bvid="BV14dRAYeE6d">
+          <div class="vi-frame">
+            <img src="https://i1.hdslb.com/bfs/archive/ac40ad211bd52570b6eb1e41df7830cf7bb3d1f9.jpg"
+                 alt="方大同《红豆》经典现场" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>《红豆》经典现场</h3>
+            <p><span class="vi-up">音乐私藏馆</span> · 4:00 · 227 万播放</p>
+          </div>
+        </article>
+
+        <article class="vi" data-bvid="BV1uiD1YCEbL">
+          <div class="vi-frame">
+            <img src="https://i1.hdslb.com/bfs/archive/ecda8161f3a76c11957d52873cf3fa7291ac410f.jpg"
+                 alt="方大同 2011 香港演唱会 『15』全场" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>2011 香港演唱会《15》全场</h3>
+            <p><span class="vi-up">郑树棠</span> · 2:25:05 · 97 万播放</p>
+          </div>
+        </article>
+
+        <article class="vi" data-bvid="BV19f421X7Jh">
+          <div class="vi-frame">
+            <img src="https://i1.hdslb.com/bfs/archive/dfee6be7e5a6ed4605fcad1b88820ef17ee3ba00.jpg"
+                 alt="方大同《爱在》『15』演唱会 live" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>《爱在》「15」演唱会 live</h3>
+            <p><span class="vi-up">修复版</span> · 5:36 · 129 万播放</p>
+          </div>
+        </article>
+
+        <article class="vi" data-bvid="BV1u6XDYPEra">
+          <div class="vi-frame">
+            <img src="https://i0.hdslb.com/bfs/archive/c94143b7e2c2b459c95b6b0690f18b758cac11e9.jpg"
+                 alt="方大同《特别的人》Live" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>《特别的人》Live</h3>
+            <p><span class="vi-up">zyl2012_音乐无限</span> · 3:53 · 35 万播放</p>
+          </div>
+        </article>
+
+        <article class="vi" data-bvid="BV1F64y1Y77v">
+          <div class="vi-frame">
+            <img src="https://i1.hdslb.com/bfs/archive/ea7527c9fd874b88c259e484bbf1bd22ca1b201c.jpg"
+                 alt="方大同《麦恩莉》" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>《麦恩莉》</h3>
+            <p><span class="vi-up">玛克琉嗣</span> · 4:51 · 43 万播放</p>
+          </div>
+        </article>
+
+        <article class="vi" data-bvid="BV1Xa411u7cN">
+          <div class="vi-frame">
+            <img src="https://i1.hdslb.com/bfs/archive/98c95d22e7bb390dc7792c9b967bda4e71fb9e32.jpg"
+                 alt="方大同《1234567》" loading="lazy" referrerpolicy="no-referrer">
+            <span class="vi-play"></span>
+          </div>
+          <div class="vi-meta">
+            <h3>《1234567》</h3>
+            <p><span class="vi-up">晚间音乐社c</span> · 4:02 · 36 万播放</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="sec-head rise" style="margin-top:60px;">
+        <h2 style="font-size:20px;letter-spacing:.12em;">去正版平台听</h2>
+        <p>完整的录音室专辑请到这些平台收听——那才是真正支持他的方式。</p>
+      </div>
+      <ul class="listen rise">
+        <li><a href="https://music.163.com/#/search/m/?s=%E6%96%B9%E5%A4%A7%E5%90%8C" target="_blank" rel="noopener noreferrer">网易云音乐</a></li>
+        <li><a href="https://y.qq.com/n/ryqq/search?w=%E6%96%B9%E5%A4%A7%E5%90%8C" target="_blank" rel="noopener noreferrer">QQ 音乐</a></li>
+        <li><a href="https://music.apple.com/cn/search?term=%E6%96%B9%E5%A4%A7%E5%90%8C" target="_blank" rel="noopener noreferrer">Apple Music</a></li>
+        <li><a href="https://www.bilibili.com/video/BV1uiD1YCEbL" target="_blank" rel="noopener noreferrer">B 站 · 2011 香港演唱会全场</a></li>
+      </ul>
+
+      <p class="src-note rise">
+        <b>关于这些视频</b>：本页只做<b>链接与官方嵌播</b>，不存储、不搬运任何影音文件——
+        视频始终托管在 B 站，播放计入原上传者。所有视频均为 B 站上的第三方上传，
+        版权归方大同、赋音乐及相关权利人所有。
+        若某个视频被下架，对应卡片会无法播放，那属于正常情况。
+        <b>想完整收听录音室版本，请走上面的正版平台。</b>
+      </p>
+    </div>
+  </section>
+
   <!-- ================= 荣誉 ================= -->
   <section id="honors">
     <div class="wrap">
       <div class="sec-head rise">
-        <span class="sec-num">三</span>
+        <span class="sec-num">四</span>
         <h2>荣誉</h2>
         <p>只列其中一部分。</p>
       </div>
@@ -570,7 +775,7 @@
   <section id="words">
     <div class="wrap">
       <div class="sec-head rise">
-        <span class="sec-num">四</span>
+        <span class="sec-num">五</span>
         <h2>摘句</h2>
       </div>
       <div class="quote rise">
@@ -673,6 +878,39 @@
       var top = t.getBoundingClientRect().top + window.pageYOffset - 18;
       window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
       if (history.replaceState) history.replaceState(null, "", id);
+    });
+  });
+  /* 封面加载失败就隐藏图片，露出底下的纯 CSS 占位与播放键 */
+  document.querySelectorAll(".vi-frame img").forEach(function (img) {
+    img.addEventListener("error", function () {
+      img.style.display = "none";
+      if (img.parentNode) img.parentNode.classList.add("no-cover");
+    });
+  });
+
+  /* 听·看：点了才加载 B 站播放器，避免一进页面就拉 8 个 iframe */
+  document.querySelectorAll(".vi").forEach(function (card) {
+    var frame = card.querySelector(".vi-frame");
+    var bvid = card.getAttribute("data-bvid");
+    if (!frame || !bvid) return;
+
+    function load() {
+      if (frame.getAttribute("data-loaded")) return;
+      frame.setAttribute("data-loaded", "1");
+      frame.innerHTML = '<iframe src="https://player.bilibili.com/player.html?bvid=' +
+        encodeURIComponent(bvid) +
+        '&autoplay=1&danmaku=0&high_quality=1" scrolling="no" frameborder="0" ' +
+        'allowfullscreen="true" title="B 站播放器"></iframe>';
+    }
+
+    frame.setAttribute("role", "button");
+    frame.setAttribute("tabindex", "0");
+    frame.addEventListener("click", load);
+    frame.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " " || e.keyCode === 13 || e.keyCode === 32) {
+        e.preventDefault();
+        load();
+      }
     });
   });
 })();
